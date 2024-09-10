@@ -15,18 +15,21 @@ import { LoginModule } from './login/login.module';
 
 /** Main Routing Module */
 import { AppRoutingModule } from './app-routing.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ServiceWorkerModule} from '@angular/service-worker';
-import {environment} from '../environments/environment';
-import {CoreModule} from './core/core.module';
-import {AccountsModule} from './accounts/accounts.module';
-import {BeneficiariesModule} from './beneficiaries/beneficiaries.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { CoreModule } from './core/core.module';
+import { AccountsModule } from './accounts/accounts.module';
+import { BeneficiariesModule } from './beneficiaries/beneficiaries.module';
 import { TransfersModule } from './transfers/transfers.module';
 import { RecentTransactionsModule } from './recent-transactions/recent-transactions.module';
 import { ChargesModule } from './charges/charges.module';
 import { TptModule } from './tpt/tpt.module';
 import { AboutUsModule } from './about-us/about-us.module';
 import { LoansModule } from './loans/loans.module';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
 
 /**
  * App Module
@@ -58,4 +61,6 @@ import { LoansModule } from './loans/loans.module';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

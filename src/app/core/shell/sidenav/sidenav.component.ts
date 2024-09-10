@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {AuthenticationService} from '../../authentication/authentication.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../authentication/authentication.service';
 
 @Component({
   selector: 'online-banking-sidenav',
@@ -19,8 +19,8 @@ export class SidenavComponent implements OnInit {
    * @param {AuthenticationService} authenticationService Authentication Service.
    */
   constructor(private router: Router,
-              private authenticationService: AuthenticationService
-              ) { }
+    private authenticationService: AuthenticationService
+  ) { }
 
   /**
    * Sets the username of the authenticated user.

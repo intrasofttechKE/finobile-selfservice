@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Router} from '@angular/router';
-import {AuthenticationService} from '../../authentication/authentication.service';
-import {animate, style, transition, trigger} from '@angular/animations';
-import {Observable} from 'rxjs';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {map} from 'rxjs/operators';
-import {MatSidenav} from '@angular/material/sidenav';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../authentication/authentication.service';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Observable } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'online-banking-toolbar',
@@ -42,8 +42,8 @@ export class ToolbarComponent implements OnInit {
    * @param {AuthenticationService} authenticationService Authentication Service
    */
   constructor(private breakpointObserver: BreakpointObserver,
-              private router: Router,
-              private authenticationService: AuthenticationService) { }
+    private router: Router,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.isHandset$.subscribe(isHandset => {
@@ -72,7 +72,7 @@ export class ToolbarComponent implements OnInit {
    */
   logout() {
     this.authenticationService.logout()
-      .subscribe(() => this.router.navigate(['/login'], {replaceUrl: true}));
+      .subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
   }
 
 }

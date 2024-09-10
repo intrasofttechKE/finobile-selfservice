@@ -1,31 +1,30 @@
-<div
-  [ngClass]="{
+<div [ngClass]="{
   'sidebar-full': !sidenavCollapsed,
   'sidebar-compact': sidenavCollapsed
   }">
 
   <div class="navigation-panel" fxLayout="column">
 
-     <!-- Removing the app-logo for a better UX -->
+    <!-- Removing the app-logo for a better UX -->
     <!-- <div class="app-brand" [routerLink]="['/home']">
       <img src="./assets/images/MifosX_logo.png" alt="app-logo" class="app-logo">
     </div> -->
 
     <div class="app-user">
-       <div class="mifos-logo">
-        <img alt="mifos-logo" src="./assets/images/sidebar_logo.png">
+      <div class="mifos-logo">
+        <img alt="mifos-logo" src="../../../../assets/icons/finobile-logo.png">
       </div>
-      <!-- <span class="app-user-name mb-05">
+      <span class="app-user-name mb-05">
         {{ username }}
-      </span> -->
-      <!-- <div class="app-user-controls">
+      </span>
+      <div class="app-user-controls">
         <button class="text-muted xs-button" mat-icon-button matTooltip="Settings" [routerLink]="['/settings']">
           <fa-icon icon="cog"></fa-icon>
         </button>
         <button class="text-muted xs-button" mat-icon-button matTooltip="Sign Out" (click)="logout()">
           <fa-icon icon="sign-out-alt"></fa-icon>
         </button>
-      </div>  -->
+      </div>
     </div>
 
     <div class="app-sidenav">
@@ -83,12 +82,12 @@
           </mat-icon>
           <a matLine>Apply for Loan</a>
         </mat-list-item>
-        <mat-list-item [routerLink]="['/surveys']">
+        <!-- <mat-list-item [routerLink]="['/surveys']">
           <mat-icon matListIcon>
             <fa-icon icon="clipboard-list" size="sm"></fa-icon>
           </mat-icon>
           <a matLine>Surveys</a>
-        </mat-list-item>
+        </mat-list-item> -->
         <mat-list-item [routerLink]="['/about-us']">
           <mat-icon matListIcon>
             <fa-icon icon="info-circle" size="sm"></fa-icon>
