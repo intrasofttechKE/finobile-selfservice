@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {AuthenticationService} from '../core/authentication/authentication.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AuthenticationService } from '../core/authentication/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +12,11 @@ export class AccountsService {
    * @param {AuthenticationService} authenticationService Service for obtaining authentication details
    */
   constructor(private http: HttpClient,
-              private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService) { }
 
   getAccounts(): Observable<any> {
-    const userId = this.authenticationService.getCredentials().userId;
-    return this.http.get(`/self/clients/${userId}/accounts`);
+    const clients = this.authenticationService.getCredentials().clients;
+    return this.http.get(`/self/clients/${clients}/accounts`);
   }
 
 }

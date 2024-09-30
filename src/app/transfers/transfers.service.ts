@@ -10,11 +10,11 @@ export class TransfersService {
   constructor(private http: HttpClient) { }
 
   getTransferTemplate() {
-   return this.http.get('/self/accounttransfers/template');
+    return this.http.get('/self/accounttransfers/template');
   }
 
-  createNewTransfer(body: TransferRequest ) {
-   return this.http.post('/self/accounttransfers', body);
+  createNewTransfer(body: TransferRequest) {
+    return this.http.post('/self/accounttransfers', body);
   }
 
 }

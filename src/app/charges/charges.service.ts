@@ -8,12 +8,12 @@ import { AuthenticationService } from '../core/authentication/authentication.ser
 export class ChargesService {
 
   constructor(private http: HttpClient,
-              private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService) { }
 
 
   getClientCharges() {
-    const userId = this.authenticationService.getCredentials().userId;
-    return this.http.get(`/self/clients/${userId}/charges`);
+    const clients = this.authenticationService.getCredentials().clients;
+    return this.http.get(`/self/clients/${clients}/charges`);
   }
 
 }

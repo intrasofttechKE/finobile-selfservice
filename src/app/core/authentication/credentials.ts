@@ -14,4 +14,5 @@ export interface Credentials {
   staffDisplayName?: string;
   userId?: number;
   username: string;
+  clientid?: number;
 }

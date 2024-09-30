@@ -16,7 +16,7 @@ import { AuthenticationInterceptor } from './authentication.interceptor';
 /** Custom Models */
 import { LoginContext } from './login-context';
 import { Credentials } from './credentials';
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 /**
  * Authentication Workflow
@@ -41,8 +41,8 @@ export class AuthenticationService {
    * @param {AuthenticationInterceptor} authenticationInterceptor Interceptor for authentication requests
    */
   constructor(private http: HttpClient,
-              private alertService: AlertService,
-              private authenticationInterceptor: AuthenticationInterceptor) {
+    private alertService: AlertService,
+    private authenticationInterceptor: AuthenticationInterceptor) {
     this.storage = sessionStorage;
     const savedCredentials = JSON.parse(
       sessionStorage.getItem(this.credentialsStorageKey) || localStorage.getItem(this.credentialsStorageKey));
@@ -59,8 +59,8 @@ export class AuthenticationService {
    * @returns {Observable<boolean>} True if User is authenticated
    */
   login(loginContext: LoginContext) {
-    this.alertService.alert({type: 'Authentication Start', message: 'Trying to login'});
-    return this.http.post('/self/authentication', {username: loginContext.username, password: loginContext.password})
+    this.alertService.alert({ type: 'Authentication Start', message: 'Trying to login' });
+    return this.http.post('/self/authentication', { username: loginContext.username, password: loginContext.password })
       .pipe(
         map((credentials: Credentials) => {
           this.onLoginSuccess(credentials);
@@ -73,7 +73,7 @@ export class AuthenticationService {
    * Sets the Authorization Token.
    * @param {Credentials} credentials Authenticated user's credentials
    */
-  onLoginSuccess(credentials: Credentials){
+  onLoginSuccess(credentials: Credentials) {
     this.authenticationInterceptor.setAuthorizationToken(credentials.base64EncodedAuthenticationKey);
     this.setCredentials(credentials);
     this.alertService.alert({ type: 'Authentication Success', message: `${credentials.username} successfully logged in!` });
@@ -98,7 +98,7 @@ export class AuthenticationService {
     if (!(userCredentials)) {
       return false;
     }
-    return userCredentials.roles.filter( (role) => role.id === environment.selfServiceRoleId).length > 0;
+    return userCredentials.roles.filter((role) => role.id === environment.selfServiceRoleId).length > 0;
   }
 
   /**

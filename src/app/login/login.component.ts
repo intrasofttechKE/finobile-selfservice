@@ -3,8 +3,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
-import {AlertService} from '../core/alert/alert.service';
-import {Alert} from '../core/alert/alert';
+import { AlertService } from '../core/alert/alert.service';
+import { Alert } from '../core/alert/alert';
 
 
 @Component({
@@ -22,16 +22,16 @@ export class LoginComponent implements OnInit {
    * @param {AlertService} alertService Alert Service
    * @param {Router} router Navigation Router
    */
-  constructor( private alertService: AlertService,
-               private router: Router) { }
+  constructor(private alertService: AlertService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.alert$ = this.alertService.alertEvent.subscribe((alertEvent: Alert) => {
       const alertType = alertEvent.type;
       if (alertType === 'Authentication Success') {
-        console.log('Authenctication success');
-        this.router.navigate(['/home'], {replaceUrl: true});
-      } else if (alertType === 'Password Reset Required'){
+        console.log('Authentication success');
+        this.router.navigate(['/home'], { replaceUrl: true });
+      } else if (alertType === 'Password Reset Required') {
         this.resetPassword = true;
       }
     });

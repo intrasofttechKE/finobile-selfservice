@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TransfersService } from './transfers.service';
+import { TransferRequest } from './transferRequest.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -15,18 +17,20 @@ export class TransfersComponent implements OnInit {
   displayedToAccountOptions: any;
   transferForm: FormGroup;
   date = new Date();
+  isSubmitting: boolean = false;
+
 
 
   constructor(private route: ActivatedRoute,
-              private formBuilder: FormBuilder) {
-    this.route.data.subscribe((data: {transferTemplate: any}) => {
-      const {fromAccountOptions, toAccountOptions} = data.transferTemplate;
+    private formBuilder: FormBuilder, private transfersService: TransfersService) {
+    this.route.data.subscribe((data: { transferTemplate: any }) => {
+      const { fromAccountOptions, toAccountOptions } = data.transferTemplate;
       this.fromAccountOptions = fromAccountOptions;
       this.displayedFromAccountOptions = fromAccountOptions;
       this.toAccountOptions = toAccountOptions;
       this.displayedToAccountOptions = toAccountOptions;
     });
-   }
+  }
 
   ngOnInit(): void {
     this.createTransferForm();
@@ -47,12 +51,44 @@ export class TransfersComponent implements OnInit {
   }
 
   handleToFieldOption(value: any) {
-    this.displayedFromAccountOptions = this.fromAccountOptions.filter( account => value ? account.accountId !== value.accountId : true);
+    this.displayedFromAccountOptions = this.fromAccountOptions.filter(account => value ? account.accountId !== value.accountId : true);
+  }
+  submitTransferRequest() {
+    this.isSubmitting = true;
+    console.log('Trying to submit the transfer request', this.transferForm.value);
+
+    const selectedFromAccount = this.transferForm.value.fromAccount;
+    const selectedToAccount = this.transferForm.value.toAccount;
+
+    const formattedDate = new Date(this.date).toISOString().split('T')[0];
+    const transferRequest: TransferRequest = {
+      fromOfficeId: selectedFromAccount.officeId,
+      fromClientId: selectedFromAccount.clientId,
+      fromAccountType: selectedFromAccount.accountType.id,
+      fromAccountId: selectedFromAccount.accountId,
+      toOfficeId: selectedToAccount.officeId,
+      toClientId: selectedToAccount.clientId,
+      toAccountType: selectedToAccount.accountType.id,
+      toAccountId: selectedToAccount.accountId,
+      dateFormat: 'yyyy-MM-dd',
+      locale: 'en',
+      transferDate: formattedDate,
+      transferAmount: this.transferForm.value.amount,
+      transferDescription: this.transferForm.value.remarks || ''
+    };
+
+    this.transfersService.createNewTransfer(transferRequest).subscribe({
+      next: (response) => {
+        console.log('Transfer successful', response);
+        this.transferForm.reset();
+        this.isSubmitting = false;
+      },
+      error: (error) => {
+        console.error('Transfer failed', error);
+      }
+    });
   }
 
-  submitTransferRequest() {
-    console.log('trying to submit the transfer request', this.transferForm.value);
-  }
 
 
 }

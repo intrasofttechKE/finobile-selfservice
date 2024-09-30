@@ -12,11 +12,11 @@ export class RecentTransactionsService {
    * @param {AuthenticationService} authenticationService Service to obtain authentication details
    */
   constructor(private http: HttpClient,
-              private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService) { }
 
   getClientTransactions() {
-    const userId = this.authenticationService.getCredentials().userId;
-    return this.http.get(`/self/clients/${userId}/transactions`);
+    const clients = this.authenticationService.getCredentials().clients;
+    return this.http.get(`/self/clients/${clients}/transactions`);
   }
 
 }
